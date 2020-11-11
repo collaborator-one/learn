@@ -7,7 +7,34 @@
 
 https://blog.csdn.net/weixin_37865166/article/details/89477489
 
+如果想要给react组件的传递参数定义是必选的或者是类型，需要引入
 
+```	
+import PropTypes from 'prop-types'
+```
+
+这个是react的一个方法
+
+<img src="https://img2018.cnblogs.com/i-beta/1470672/201911/1470672-20191120114320922-1234406628.png" alt="img" style="zoom:50%;" />
+
+```j s
+//设置默认值用法
+//设置默认值--->存在默认值情况下必填参数可以不传值，没有默认值必须传值
+HeaderComponent.defaultProps = {
+    title: '默认值'
+};
+HeaderComponent是组件的类组件的类名
+//设置值的类型和属性的用法
+HeaderComponent.PropTypes = {
+	title: PropTypes.func.isrequired
+}
+```
+
+react非常提倡使用受控组件不提倡非受控组件
+
+![image-20201027144435257](/Users/yangyang/Library/Application Support/typora-user-images/image-20201027144435257.png)
+
+如图，下面选中的是受控组件，上面用ref写的就是非受控组件
 
 
 
@@ -52,6 +79,61 @@ element diff。在进行组件diff的时候，两个类型相同的组件，需�
 
 
 
+
+
+
+## redux(http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html)
+
+
+
+redux包含几个部分
+
+​	1、store：保存数据的地方，可以把它看成一个容器。整个应用只能有一个 Store。
+
+​	2、state：一个包含所有数据的对象。通过store.getState（）拿到
+
+```
+state = store.getState()
+
+```
+
+​	3、action：定义动作的地方
+
+​	4、reducer：是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。调用动作处理数据放到state里面的。通过store.dispatch（）来实现
+
+​	5、通过store.subscribe监听修改的数据渲染到页面上
+
+```javascript
+let unsubscribe = store.subscribe(() =>
+  console.log(store.getState())
+);
+
+unsubscribe();
+```
+
+
+
+redux通过两个方法跟props绑定
+
+mapStateToProps将stage的值赋值给props
+
+```js
+mapStatetoProps= (state)=>{
+	return {
+    value: state.num
+  }
+}
+```
+
+```js
+mapDispatchToProps=()=>{
+	return {
+    add: ()=>{dispatch(addAction)}
+  }
+}
+```
+
+然后通过connect这个上述两个方法连接到组件上就可以了
 
 
 
